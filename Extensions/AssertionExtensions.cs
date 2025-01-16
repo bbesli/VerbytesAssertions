@@ -2,7 +2,7 @@
 using VerbytesAssertions.Others;
 using VerbytesAssertions.Primitives;
 
-namespace VerbytesAssertions.Extensions
+namespace VerbytesAssertions
 {
     /// <summary>
     /// Provides extension methods to enable fluent assertion syntax using the `.Should()` method.

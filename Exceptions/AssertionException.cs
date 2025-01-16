@@ -1,4 +1,4 @@
-﻿namespace VerbytesAssertions.Exceptions
+﻿namespace VerbytesAssertions
 {
     /// <summary>
     /// Custom exception for assertion failures.

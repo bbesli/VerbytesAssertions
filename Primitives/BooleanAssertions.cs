@@ -1,6 +1,4 @@
-﻿using VerbytesAssertions.Exceptions;
-
-namespace VerbytesAssertions.Primitives
+﻿namespace VerbytesAssertions.Primitives
 {
     /// <summary>
     /// Contains assertion methods for validating boolean values.
