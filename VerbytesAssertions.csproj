@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageIcon>assertions.png</PackageIcon>
+    <Description>VerbytesAssertions is a modern, developer-friendly .NET assertion library inspired by FluentAssertions. It offers expressive, readable syntax to streamline automated testing of objects, methods, and systems. Compatible with xUnit, it enhances developer productivity with intuitive assertions and detailed error messages.</Description>
+    <Authors>Verbytes</Authors>
+    <Company>Verbytes</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/bbesli/VerbytesAssertions</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackAsTool>True</PackAsTool>
+    <IncludeSymbols>True</IncludeSymbols>
+    <PackageTags>FluentAssertion, XUnit Assertions, Assertion, Assertions</PackageTags>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\Users\TR\Downloads\assertions.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="3.1.0" />
+    <PackageReference Include="xunit.assert" Version="2.9.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
