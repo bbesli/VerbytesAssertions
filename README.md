@@ -24,6 +24,7 @@ The project is structured into the following components:
 - **`Extensions/`**: Fluent extensions for enabling `.Should()` syntax.
 - **`Exceptions/`**: Custom exception types for better error messages.
 - **`Properties/`**: Reserved for project-level properties or shared configurations.
+- **`Others/`**: For now, it is just including NullableAssertions.
 
 ---
 
