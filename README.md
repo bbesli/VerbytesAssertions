@@ -3,8 +3,6 @@
 
 **VerbytesAssertions** is a modern, developer-friendly assertion library for .NET applications. Inspired by FluentAssertions, it provides a highly expressive, intuitive, and readable syntax for asserting the behavior and state of objects, methods, and systems during automated testing. Compatible with **xUnit**, **NUnit**, or **MSTest**, VerbytesAssertions simplifies and enhances your testing process.
 
-![VerbytesAssertions](./assertions.png)
-
 ---
 
 ## Features
@@ -135,7 +133,8 @@ You can use VerbytesAssertions in your test projects with testing frameworks lik
 ### xUnit Example
 
 ```csharp
-using Verbytes.Assertions;
+using VerbytesAssertions.Exceptions;
+using VerbytesAssertions.Extensions;
 using Xunit;
 
 public class BooleanAssertionsTests
@@ -161,7 +160,6 @@ public class BooleanAssertionsTests
 
 ## Future Enhancements
 
-- Add support for more assertion types like `DateTime`, `Nullable<T>`, and custom objects.
 - Create NuGet packaging for easy distribution.
 - Enhance error reporting with richer context details.
 
@@ -169,4 +167,4 @@ public class BooleanAssertionsTests
 
 ## License
 
-This library is distributed under the MIT License. See the `LICENSE` file for more details.
+This library is distributed under the MIT License.

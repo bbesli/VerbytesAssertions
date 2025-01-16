@@ -11,11 +11,14 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/bbesli/VerbytesAssertions</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackAsTool>True</PackAsTool>
-    <IncludeSymbols>True</IncludeSymbols>
+    <PackAsTool>False</PackAsTool>
+    <IncludeSymbols>False</IncludeSymbols>
     <PackageTags>FluentAssertion, XUnit Assertions, Assertion, Assertions</PackageTags>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <Version>1.0.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
