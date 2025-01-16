@@ -158,13 +158,6 @@ public class BooleanAssertionsTests
 
 ---
 
-## Future Enhancements
-
-- Create NuGet packaging for easy distribution.
-- Enhance error reporting with richer context details.
-
----
-
 ## License
 
 This library is distributed under the MIT License.
