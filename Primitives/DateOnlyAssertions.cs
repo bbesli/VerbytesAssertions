@@ -1,4 +1,6 @@
-﻿namespace VerbytesAssertions.Primitives
+﻿using VerbytesAssertions.Executor;
+
+namespace VerbytesAssertions.Primitives
 {
     /// <summary>
     /// Contains assertion methods for validating <see cref="DateOnly"/> values.
@@ -18,16 +20,10 @@
         /// <param name="expected">The expected DateOnly value.</param>
         /// <param name="because">The reason for the assertion failure, if any.</param>
         /// <param name="becauseArgs">Arguments for formatting the reason.</param>
-        public DateOnlyAssertions Be(DateOnly expected, string because = "", params object[] becauseArgs)
-        {
-            if (_subject != expected)
-            {
-                var reason = string.Format(because, becauseArgs);
-                throw new AssertionException($"Expected DateOnly to be {expected}{reason}, but found {_subject}.");
-            }
-
-            return this;
-        }
+        public void Be(DateOnly expected, string because = "", params object[] becauseArgs) =>
+            AssertionExecutor.Execute(_subject == expected, this)
+                .WithErrorMessage("Expected DateOnly to be {0}{1}, but found {2}.", expected, FormatBecause(because, becauseArgs), _subject)
+                .GetResult();
 
         /// <summary>
         /// Asserts that the DateOnly value is not equal to the unexpected value.
@@ -35,16 +31,10 @@
         /// <param name="unexpected">The unexpected DateOnly value.</param>
         /// <param name="because">The reason for the assertion failure, if any.</param>
         /// <param name="becauseArgs">Arguments for formatting the reason.</param>
-        public DateOnlyAssertions NotBe(DateOnly unexpected, string because = "", params object[] becauseArgs)
-        {
-            if (_subject == unexpected)
-            {
-                var reason = string.Format(because, becauseArgs);
-                throw new AssertionException($"Did not expect DateOnly to be {unexpected}{reason}, but it was.");
-            }
-
-            return this;
-        }
+        public void NotBe(DateOnly unexpected, string because = "", params object[] becauseArgs) =>
+            AssertionExecutor.Execute(_subject != unexpected, this)
+                .WithErrorMessage("Did not expect DateOnly to be {0}{1}, but it was.", unexpected, FormatBecause(because, becauseArgs))
+                .GetResult();
 
         /// <summary>
         /// Asserts that the DateOnly value is before the expected value.
@@ -52,16 +42,10 @@
         /// <param name="expected">The expected DateOnly value to compare against.</param>
         /// <param name="because">The reason for the assertion failure, if any.</param>
         /// <param name="becauseArgs">Arguments for formatting the reason.</param>
-        public DateOnlyAssertions BeBefore(DateOnly expected, string because = "", params object[] becauseArgs)
-        {
-            if (_subject >= expected)
-            {
-                var reason = string.Format(because, becauseArgs);
-                throw new AssertionException($"Expected DateOnly to be before {expected}{reason}, but found {_subject}.");
-            }
-
-            return this;
-        }
+        public void BeBefore(DateOnly expected, string because = "", params object[] becauseArgs) =>
+            AssertionExecutor.Execute(_subject < expected, this)
+                .WithErrorMessage("Expected DateOnly to be before {0}{1}, but found {2}.", expected, FormatBecause(because, becauseArgs), _subject)
+                .GetResult();
 
         /// <summary>
         /// Asserts that the DateOnly value is after the expected value.
@@ -69,16 +53,10 @@
         /// <param name="expected">The expected DateOnly value to compare against.</param>
         /// <param name="because">The reason for the assertion failure, if any.</param>
         /// <param name="becauseArgs">Arguments for formatting the reason.</param>
-        public DateOnlyAssertions BeAfter(DateOnly expected, string because = "", params object[] becauseArgs)
-        {
-            if (_subject <= expected)
-            {
-                var reason = string.Format(because, becauseArgs);
-                throw new AssertionException($"Expected DateOnly to be after {expected}{reason}, but found {_subject}.");
-            }
-
-            return this;
-        }
+        public void BeAfter(DateOnly expected, string because = "", params object[] becauseArgs) =>
+            AssertionExecutor.Execute(_subject > expected, this)
+                .WithErrorMessage("Expected DateOnly to be after {0}{1}, but found {2}.", expected, FormatBecause(because, becauseArgs), _subject)
+                .GetResult();
 
         /// <summary>
         /// Asserts that the DateOnly value is within the specified range (inclusive).
@@ -87,15 +65,20 @@
         /// <param name="end">The end of the range.</param>
         /// <param name="because">The reason for the assertion failure, if any.</param>
         /// <param name="becauseArgs">Arguments for formatting the reason.</param>
-        public DateOnlyAssertions BeInRange(DateOnly start, DateOnly end, string because = "", params object[] becauseArgs)
-        {
-            if (_subject < start || _subject > end)
-            {
-                var reason = string.Format(because, becauseArgs);
-                throw new AssertionException($"Expected DateOnly to be between {start} and {end}{reason}, but found {_subject}.");
-            }
+        public void BeInRange(DateOnly start, DateOnly end, string because = "", params object[] becauseArgs) =>
+            AssertionExecutor.Execute(_subject >= start && _subject <= end, this)
+                .WithErrorMessage("Expected DateOnly to be between {0} and {1}{2}, but found {3}.", start, end, FormatBecause(because, becauseArgs), _subject)
+                .GetResult();
 
-            return this;
+        /// <summary>
+        /// Formats the "because" message for inclusion in error messages.
+        /// </summary>
+        /// <param name="because">The reason string.</param>
+        /// <param name="args">Arguments for formatting the reason.</param>
+        /// <returns>The formatted "because" message.</returns>
+        private static string FormatBecause(string because, params object[] args)
+        {
+            return string.IsNullOrEmpty(because) ? string.Empty : " " + string.Format(because, args);
         }
     }
 }

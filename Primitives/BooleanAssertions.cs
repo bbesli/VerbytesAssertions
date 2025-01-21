@@ -1,4 +1,6 @@
-﻿namespace VerbytesAssertions.Primitives
+﻿using VerbytesAssertions.Executor;
+
+namespace VerbytesAssertions.Primitives
 {
     /// <summary>
     /// Contains assertion methods for validating boolean values.
@@ -6,80 +8,32 @@
     public class BooleanAssertions
     {
         private readonly bool? _subject;
-
         public BooleanAssertions(bool? value)
         {
             _subject = value;
         }
 
-        /// <summary>
-        /// Asserts that the boolean value is equal to the expected value.
-        /// </summary>
-        public BooleanAssertions Be(bool expected, string because = "", params object[] becauseArgs)
-        {
-            if (_subject != expected)
-            {
-                var reason = string.Format(because, becauseArgs);
-                throw new AssertionException($"Expected boolean to be {expected}{reason}, but found {_subject}.");
-            }
+        public BooleanAssertions Be(bool expected, string because = "", params object[] becauseArgs) => AssertionExecutor.Execute(_subject == expected, this)
+                .WithErrorMessage("Expected boolean to be {0}{1}, but found {2}.", expected, FormatBecause(because, becauseArgs), _subject)
+                .GetResult();
 
-            return this;
-        }
+        public BooleanAssertions BeTrue(string because = "", params object[] becauseArgs) => AssertionExecutor.Execute(_subject == true, this)
+                .WithErrorMessage("Expected boolean to be true{0}, but found {1}.", FormatBecause(because, becauseArgs), _subject)
+                .GetResult();
 
-        /// <summary>
-        /// Asserts that the boolean value is true.
-        /// </summary>
-        public BooleanAssertions BeTrue(string because = "", params object[] becauseArgs)
-        {
-            if (_subject != true)
-            {
-                var reason = string.Format(because, becauseArgs);
-                throw new AssertionException($"Expected boolean to be true{reason}, but found {_subject}.");
-            }
+        public BooleanAssertions BeFalse(string because = "", params object[] becauseArgs) => AssertionExecutor.Execute(_subject == false, this)
+                .WithErrorMessage("Expected boolean to be false{0}, but found {1}.", FormatBecause(because, becauseArgs), _subject)
+                .GetResult();
 
-            return this;
-        }
+        public BooleanAssertions NotBe(bool unexpected, string because = "", params object[] becauseArgs) => AssertionExecutor.Execute(_subject != unexpected, this)
+                .WithErrorMessage("Did not expect boolean to be {0}{1}, but it was.", unexpected, FormatBecause(because, becauseArgs))
+                .GetResult();
 
-        /// <summary>
-        /// Asserts that the boolean value is false.
-        /// </summary>
-        public BooleanAssertions BeFalse(string because = "", params object[] becauseArgs)
-        {
-            if (_subject != false)
-            {
-                var reason = string.Format(because, becauseArgs);
-                throw new AssertionException($"Expected boolean to be false{reason}, but found {_subject}.");
-            }
+        public BooleanAssertions Imply(bool consequent, string because = "", params object[] becauseArgs) => AssertionExecutor.Execute(!(_subject == true && !consequent), this)
+                .WithErrorMessage("Expected {0} to imply {1}{2}, but it did not.", _subject, consequent, FormatBecause(because, becauseArgs))
+                .GetResult();
 
-            return this;
-        }
+        private static string FormatBecause(string because, params object[] args) => string.IsNullOrEmpty(because) ? string.Empty : " " + string.Format(because, args);
 
-        /// <summary>
-        /// Asserts that the boolean value is not equal to the unexpected value.
-        /// </summary>
-        public BooleanAssertions NotBe(bool unexpected, string because = "", params object[] becauseArgs)
-        {
-            if (_subject == unexpected)
-            {
-                var reason = string.Format(because, becauseArgs);
-                throw new AssertionException($"Did not expect boolean to be {unexpected}{reason}, but it was.");
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Asserts that the boolean value implies another boolean value.
-        /// </summary>
-        public BooleanAssertions Imply(bool consequent, string because = "", params object[] becauseArgs)
-        {
-            if (_subject == true && !consequent)
-            {
-                var reason = string.Format(because, becauseArgs);
-                throw new AssertionException($"Expected {_subject} to imply {consequent}{reason}, but it did not.");
-            }
-
-            return this;
-        }
     }
 }
