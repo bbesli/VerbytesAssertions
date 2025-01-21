@@ -16,9 +16,10 @@
     <PackageTags>FluentAssertion, XUnit Assertions, Assertion, Assertions</PackageTags>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <AssemblyVersion>1.0.0.3</AssemblyVersion>
-    <FileVersion>1.0.0.3</FileVersion>
-    <Version>1.0.0.3</Version>
+    <AssemblyVersion>1.0.5</AssemblyVersion>
+    <FileVersion>1.0.5</FileVersion>
+    <Version>1.0.5</Version>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
